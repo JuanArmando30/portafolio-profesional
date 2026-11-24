@@ -19,25 +19,21 @@ export const profile = {
     'Análisis de datos',
   ],
   bio: [
-    'Construyo ',
-    { hl: 'sistemas completos' },
-    ': desde la base de datos y la API hasta la interfaz y su ',
-    { hl: 'despliegue en la nube' },
-    '. Especializado en software que resuelve procesos reales, con experiencia en IoT y análisis de datos.',
+    'Desarrollador de software enfocado en ',
+    { hl: 'análisis de datos' },
+    ' y soluciones tecnológicas. Trabajo con desarrollo web full stack, Python, SQL, AWS, Excel, Power BI y redes para ',
+    { hl: 'optimizar procesos mediante la tecnología' },
+    '. Busco sumarme a proyectos innovadores donde aportar una visión analítica y soluciones eficientes mientras sigo creciendo técnicamente. Me distinguen el ',
+    { hl: 'pensamiento crítico, la iniciativa y el aprendizaje autónomo' },
+    '.',
   ],
-  email: 'castillo.rjuan222.1922@gmail.com',
+  email: 'Juanarmandoc11@gmail.com',
   github: 'https://github.com/JuanArmando30',
   linkedin: '', // ej. 'https://www.linkedin.com/in/tu-usuario'
   cv: '', // ej. 'cv.pdf' (colócalo en /public)
   photo: 'img/foto.jpg', // coloca tu foto en /public/img/foto.jpg
   available: true,
 }
-
-export const stats = [
-  { value: 10, suffix: '+', label: 'proyectos' },
-  { value: 3, suffix: '', label: 'sistemas en la nube' },
-  { value: 1, suffix: '', label: 'sistema en producción' },
-]
 
 export const featured = {
   badge: 'Institución educativa · En producción',
@@ -160,30 +156,64 @@ export const projects = [
 // Íconos propios para tecnologías sin logo en devicon
 export const customIcons = {
   websocket:
-    '<svg viewBox="0 0 48 48" fill="none" stroke="#5EEAD4" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 17h30l-7-7M40 31H10l7 7"/></svg>',
-  dw: '<svg viewBox="0 0 48 48" fill="none" stroke="#2DD4BF" stroke-width="2.5"><ellipse cx="24" cy="11" rx="14" ry="5"/><path d="M10 11v26c0 2.8 6.3 5 14 5s14-2.2 14-5V11"/><path d="M10 20c0 2.8 6.3 5 14 5s14-2.2 14-5M10 28.5c0 2.8 6.3 5 14 5s14-2.2 14-5"/></svg>',
+    '<svg viewBox="0 0 48 48" fill="none" stroke="#22D3EE" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 17h30l-7-7M40 31H10l7 7"/></svg>',
+  dw: '<svg viewBox="0 0 48 48" fill="none" stroke="#34D399" stroke-width="2.5"><ellipse cx="24" cy="11" rx="14" ry="5"/><path d="M10 11v26c0 2.8 6.3 5 14 5s14-2.2 14-5V11"/><path d="M10 20c0 2.8 6.3 5 14 5s14-2.2 14-5M10 28.5c0 2.8 6.3 5 14 5s14-2.2 14-5"/></svg>',
   powerbi:
     '<svg viewBox="0 0 48 48"><rect x="27" y="6" width="11" height="36" rx="3" fill="#F2C811"/><rect x="18.5" y="14" width="11" height="28" rx="3" fill="#E6AD10"/><rect x="10" y="23" width="11" height="19" rx="3" fill="#C99214"/></svg>',
   excel:
     '<svg viewBox="0 0 48 48"><rect x="14" y="6" width="28" height="36" rx="3" fill="#21A366"/><path d="M14 18h28M14 30h28M28 6v36" stroke="#107C41" stroke-width="2"/><rect x="6" y="13" width="22" height="22" rx="3" fill="#107C41"/><path d="m11 18 12 12m0-12L11 30" stroke="#fff" stroke-width="3" stroke-linecap="round"/></svg>',
   https:
-    '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.5" stroke-linejoin="round"><rect x="10" y="21" width="28" height="21" rx="4" stroke="#2DD4BF"/><path d="M16 21v-6a8 8 0 0 1 16 0v6" stroke="#2DD4BF"/><circle cx="24" cy="31" r="3" fill="#2DD4BF"/></svg>',
+    '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.5" stroke-linejoin="round"><rect x="10" y="21" width="28" height="21" rx="4" stroke="#34D399"/><path d="M16 21v-6a8 8 0 0 1 16 0v6" stroke="#34D399"/><circle cx="24" cy="31" r="3" fill="#34D399"/></svg>',
   esp32:
     '<svg viewBox="0 0 48 48"><rect x="12" y="12" width="24" height="24" rx="3" fill="#E7352C"/><rect x="18" y="18" width="12" height="12" rx="1.5" fill="#fff" opacity=".9"/><g stroke="#9CA3AF" stroke-width="2.5" stroke-linecap="round"><path d="M17 5v5M24 5v5M31 5v5M17 38v5M24 38v5M31 38v5M5 17h5M5 24h5M5 31h5M38 17h5M38 24h5M38 31h5"/></g></svg>',
   mediapipe:
     '<svg viewBox="0 0 48 48" fill="none" stroke-width="3" stroke-linecap="round"><path d="M16 40V22M22 40V10M28 40V12M34 40V18" stroke="#0097A7"/><circle cx="16" cy="20" r="3" fill="#FFC107" stroke="none"/><circle cx="22" cy="8" r="3" fill="#FFC107" stroke="none"/><circle cx="28" cy="10" r="3" fill="#FFC107" stroke="none"/><circle cx="34" cy="16" r="3" fill="#FFC107" stroke="none"/></svg>',
   cisco:
     '<svg viewBox="0 0 48 48" fill="none" stroke="#049FD9" stroke-width="2.5"><rect x="18" y="5" width="12" height="9" rx="2"/><rect x="5" y="34" width="12" height="9" rx="2"/><rect x="31" y="34" width="12" height="9" rx="2"/><path d="M24 14v10M11 34v-6h26v6M24 24v4"/></svg>',
-  vlan: '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.5"><rect x="6" y="18" width="36" height="12" rx="3" stroke="#2DD4BF"/><g stroke="#2DD4BF" stroke-linecap="round"><path d="M12 24h2M18 24h2M24 24h2M30 24h2"/></g><path d="M12 18V8M36 18V8M12 30v10M36 30v10" stroke="#F59E0B" stroke-linecap="round"/></svg>',
-  ipv6: '<svg viewBox="0 0 48 48"><rect x="4" y="12" width="40" height="24" rx="6" fill="none" stroke="#5EEAD4" stroke-width="2.5"/><text x="24" y="28.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11" fill="#5EEAD4">IPv6</text></svg>',
+  vlan: '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.5"><rect x="6" y="18" width="36" height="12" rx="3" stroke="#34D399"/><g stroke="#34D399" stroke-linecap="round"><path d="M12 24h2M18 24h2M24 24h2M30 24h2"/></g><path d="M12 18V8M36 18V8M12 30v10M36 30v10" stroke="#F59E0B" stroke-linecap="round"/></svg>',
+  ipv6: '<svg viewBox="0 0 48 48"><rect x="4" y="12" width="40" height="24" rx="6" fill="none" stroke="#22D3EE" stroke-width="2.5"/><text x="24" y="28.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11" fill="#22D3EE">IPv6</text></svg>',
   security:
-    '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.5" stroke-linejoin="round"><path d="M24 5 8 11v12c0 10 7 17 16 20 9-3 16-10 16-20V11L24 5Z" stroke="#EF4444"/><path d="m17 24 5 5 9-10" stroke="#2DD4BF" stroke-linecap="round"/></svg>',
+    '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.5" stroke-linejoin="round"><path d="M24 5 8 11v12c0 10 7 17 16 20 9-3 16-10 16-20V11L24 5Z" stroke="#EF4444"/><path d="m17 24 5 5 9-10" stroke="#34D399" stroke-linecap="round"/></svg>',
 }
 
+// Cada categoría es un cuadro. icon: server | chart | layout | cloud | chip | shield
+// wide: true hace que el cuadro ocupe dos columnas en escritorio.
 // img: URL de imagen · svg: clave en customIcons · invert: logo oscuro que se aclara en tema oscuro
 export const stacks = [
   {
+    name: 'Backend',
+    icon: 'server',
+    desc: 'APIs REST, lógica de negocio y servicios en tiempo real.',
+    wide: true,
+    items: [
+      { name: 'Python', img: dev('python') },
+      { name: 'PHP', img: dev('php') },
+      { name: 'FastAPI', img: dev('fastapi') },
+      { name: 'C#', img: dev('csharp') },
+      { name: 'ASP.NET', img: dev('dotnetcore') },
+      { name: 'Java', img: dev('java') },
+      { name: 'C++', img: dev('cplusplus') },
+      { name: 'WebSocket', svg: 'websocket' },
+      { name: 'Apache', img: dev('apache') },
+    ],
+  },
+  {
+    name: 'Datos y análisis',
+    icon: 'chart',
+    desc: 'Modelado, consultas y tableros para decidir con datos.',
+    items: [
+      { name: 'MySQL', img: dev('mysql') },
+      { name: 'Power BI', svg: 'powerbi' },
+      { name: 'Excel', svg: 'excel' },
+      { name: 'Data Warehouse', svg: 'dw' },
+      { name: 'NumPy', img: dev('numpy') },
+    ],
+  },
+  {
     name: 'Frontend',
+    icon: 'layout',
+    desc: 'Interfaces claras, responsivas y animadas.',
+    wide: true,
     items: [
       { name: 'HTML5', img: dev('html5') },
       { name: 'CSS3', img: dev('css3') },
@@ -195,44 +225,9 @@ export const stacks = [
     ],
   },
   {
-    name: 'Backend',
-    items: [
-      { name: 'PHP', img: dev('php') },
-      { name: 'Python', img: dev('python') },
-      { name: 'FastAPI', img: dev('fastapi') },
-      { name: 'C#', img: dev('csharp') },
-      { name: 'ASP.NET', img: dev('dotnetcore') },
-      { name: 'Java', img: dev('java') },
-      { name: 'C++', img: dev('cplusplus') },
-      { name: 'WebSocket', svg: 'websocket' },
-      { name: 'Apache', img: dev('apache') },
-    ],
-  },
-  {
-    name: 'Datos',
-    items: [
-      { name: 'MySQL', img: dev('mysql') },
-      { name: 'Data Warehouse', svg: 'dw' },
-      { name: 'Power BI', svg: 'powerbi' },
-      { name: 'Excel', svg: 'excel' },
-      { name: 'NumPy', img: dev('numpy') },
-    ],
-  },
-  {
-    name: 'Cloud',
-    items: [
-      { name: 'AWS', img: dev('amazonwebservices', 'amazonwebservices-original-wordmark'), invert: true },
-      { name: 'Git', img: dev('git') },
-      { name: 'GitHub', img: dev('github'), invert: true },
-      { name: 'Postman', img: dev('postman') },
-      { name: 'Swagger', img: dev('swagger') },
-      { name: 'VS Code', img: dev('vscode') },
-      { name: 'HTTPS · Caddy', svg: 'https' },
-      { name: 'Windows Server', img: dev('windows11') },
-    ],
-  },
-  {
-    name: 'IoT e IA',
+    name: 'IoT e Inteligencia Artificial',
+    icon: 'chip',
+    desc: 'Hardware conectado y visión por computadora.',
     items: [
       { name: 'ESP32', svg: 'esp32' },
       { name: 'Arduino', img: dev('arduino') },
@@ -243,12 +238,30 @@ export const stacks = [
     ],
   },
   {
-    name: 'Redes',
+    name: 'Redes y seguridad',
+    icon: 'shield',
+    desc: 'Diseño de redes y buenas prácticas de seguridad.',
     items: [
       { name: 'Packet Tracer', svg: 'cisco' },
       { name: 'VLAN', svg: 'vlan' },
       { name: 'IPv6', svg: 'ipv6' },
       { name: 'Ciberseguridad', svg: 'security' },
+    ],
+  },
+  {
+    name: 'Cloud y herramientas',
+    icon: 'cloud',
+    desc: 'Despliegue, control de versiones, pruebas y documentación.',
+    wide: true,
+    items: [
+      { name: 'AWS', img: dev('amazonwebservices', 'amazonwebservices-original-wordmark'), invert: true },
+      { name: 'Git', img: dev('git') },
+      { name: 'GitHub', img: dev('github'), invert: true },
+      { name: 'Postman', img: dev('postman') },
+      { name: 'Swagger', img: dev('swagger') },
+      { name: 'VS Code', img: dev('vscode') },
+      { name: 'HTTPS · Caddy', svg: 'https' },
+      { name: 'Windows Server', img: dev('windows11') },
     ],
   },
 ]

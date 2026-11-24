@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
-import { profile, stats } from '../data/portfolio'
+import { profile } from '../data/portfolio'
 import useTypewriter from '../hooks/useTypewriter'
-import { Counter, Magnetic } from './Motion'
+import { Magnetic } from './Motion'
 import { ArrowIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -48,7 +48,6 @@ export default function Hero() {
           </motion.p>
 
           <motion.p className="hero__bio" {...fadeUp(1.05)}>
-            <span className="hl-strong">{profile.role}</span>.{' '}
             {profile.bio.map((part, i) =>
               typeof part === 'string' ? part : <span key={i} className="hl">{part.hl}</span>
             )}
@@ -126,23 +125,6 @@ export default function Hero() {
               ⚡ IoT + IA
             </motion.span>
           </motion.div>
-
-          <motion.ul
-            className="stats"
-            initial="hidden"
-            animate="show"
-            variants={{ hidden: {}, show: { transition: { staggerChildren: 0.12, delayChildren: 1.3 } } }}
-          >
-            {stats.map((s) => (
-              <motion.li
-                key={s.label}
-                variants={{ hidden: { opacity: 0, y: 20 }, show: { opacity: 1, y: 0, transition: { ease } } }}
-              >
-                <strong><Counter value={s.value} suffix={s.suffix} /></strong>
-                <span>{s.label}</span>
-              </motion.li>
-            ))}
-          </motion.ul>
         </motion.div>
       </div>
 
