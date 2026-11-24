@@ -1,0 +1,46 @@
+import { useCallback, useEffect, useState } from 'react'
+import { AnimatePresence, MotionConfig } from 'framer-motion'
+import Background from './components/Background'
+import Navbar from './components/Navbar'
+import Hero from './components/Hero'
+import Projects from './components/Projects'
+import Tech from './components/Tech'
+import Experience from './components/Experience'
+import Contact from './components/Contact'
+import { BackToTop, CursorGlow, Footer, Preloader } from './components/Extras'
+
+const initialTheme = () => document.documentElement.dataset.theme || 'dark'
+
+export default function App() {
+  const [theme, setTheme] = useState(initialTheme)
+  const [loading, setLoading] = useState(true)
+  const done = useCallback(() => setLoading(false), [])
+
+  useEffect(() => {
+    document.documentElement.dataset.theme = theme
+    try { localStorage.setItem('tema', theme) } catch { /* modo privado */ }
+  }, [theme])
+
+  return (
+    // reducedMotion="user": respeta la preferencia del sistema de reducir animaciones
+    <MotionConfig reducedMotion="user">
+      <AnimatePresence>{loading && <Preloader onDone={done} />}</AnimatePresence>
+      <Background />
+      <CursorGlow />
+      {!loading && (
+        <>
+          <Navbar theme={theme} onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))} />
+          <main>
+            <Hero />
+            <Projects />
+            <Tech />
+            <Experience />
+            <Contact />
+          </main>
+          <Footer />
+          <BackToTop />
+        </>
+      )}
+    </MotionConfig>
+  )
+}
