@@ -47,3 +47,9 @@ export const CheckIcon = (p) => (
 export const DownloadIcon = (p) => (
   <svg {...base} {...p}><path {...stroke} d="M12 4v11m-5-5 5 5 5-5M5 20h14" /></svg>
 )
+export const EyeIcon = (p) => (
+  <svg {...base} {...p}><g {...stroke}><path d="M2 12s3.6-7 10-7 10 7 10 7-3.6 7-10 7S2 12 2 12Z" /><circle cx="12" cy="12" r="3" /></g></svg>
+)
+export const CloseIcon = (p) => (
+  <svg {...base} {...p}><path {...stroke} d="M6 6l12 12M18 6 6 18" /></svg>
+)

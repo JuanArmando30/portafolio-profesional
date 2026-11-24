@@ -2,20 +2,23 @@ import { useEffect, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
 import { GitHubIcon, MoonIcon, SunIcon } from './Icons'
 import { profile } from '../data/portfolio'
+import { useLang } from '../i18n'
 
-const links = [
-  { id: 'proyectos', label: 'Proyectos' },
-  { id: 'tecnologias', label: 'Tecnologías' },
-  { id: 'experiencia', label: 'Experiencia' },
-  { id: 'contacto', label: 'Contacto' },
-]
+const ids = ['proyectos', 'tecnologias', 'formacion', 'contacto']
+const keys = ['projects', 'tech', 'education', 'contact']
+
+export function BrandMark({ size = 36 }) {
+  return <img className="logo__mark" src={`${import.meta.env.BASE_URL}favicon.svg`} alt="" width={size} height={size} />
+}
 
 export default function Navbar({ theme, onToggleTheme }) {
+  const { t, lang, toggleLang } = useLang()
   const [scrolled, setScrolled] = useState(false)
   const [active, setActive] = useState('')
   const [open, setOpen] = useState(false)
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 25 })
+  const links = ids.map((id, i) => ({ id, label: t.nav[keys[i]] }))
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -30,7 +33,7 @@ export default function Navbar({ theme, onToggleTheme }) {
       (entries) => entries.forEach((e) => e.isIntersecting && setActive(e.target.id)),
       { rootMargin: '-45% 0px -50% 0px' }
     )
-    ;['inicio', ...links.map((l) => l.id)].forEach((id) => {
+    ;['inicio', ...ids].forEach((id) => {
       const el = document.getElementById(id)
       if (el) io.observe(el)
     })
@@ -46,12 +49,12 @@ export default function Navbar({ theme, onToggleTheme }) {
     >
       <motion.div className="nav__progress" style={{ scaleX: progress }} />
       <div className="container nav__inner">
-        <a href="#inicio" className="logo" onClick={() => setOpen(false)}>
-          <span className="logo__mark">{profile.initials}</span>
-          {profile.logo}<span className="logo__dot">.dev</span>
+        <a href="#inicio" className="logo" onClick={() => setOpen(false)} aria-label={profile.fullName}>
+          <BrandMark />
+          <span className="logo__text">{profile.brand}</span>
         </a>
 
-        <nav className="nav__links" aria-label="Principal">
+        <nav className="nav__links" aria-label={t.nav.main}>
           {links.map((l) => (
             <a key={l.id} href={`#${l.id}`} className={active === l.id ? 'is-active' : ''}>
               {active === l.id && (
@@ -66,7 +69,20 @@ export default function Navbar({ theme, onToggleTheme }) {
           <a className="icon-btn" href={profile.github} target="_blank" rel="noopener" aria-label="GitHub">
             <GitHubIcon />
           </a>
-          <button className="icon-btn" onClick={onToggleTheme} aria-label="Cambiar tema">
+          <button className="icon-btn lang-btn" onClick={toggleLang} aria-label={t.nav.lang} title={t.nav.lang}>
+            <AnimatePresence mode="wait" initial={false}>
+              <motion.span
+                key={lang}
+                initial={{ y: 12, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                exit={{ y: -12, opacity: 0 }}
+                transition={{ duration: 0.2 }}
+              >
+                {lang.toUpperCase()}
+              </motion.span>
+            </AnimatePresence>
+          </button>
+          <button className="icon-btn" onClick={onToggleTheme} aria-label={t.nav.theme} title={t.nav.theme}>
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
                 key={theme}
@@ -83,7 +99,7 @@ export default function Navbar({ theme, onToggleTheme }) {
           <button
             className={`icon-btn burger ${open ? 'is-open' : ''}`}
             onClick={() => setOpen((o) => !o)}
-            aria-label="Abrir menú"
+            aria-label={t.nav.menu}
             aria-expanded={open}
           >
             <span /><span /><span />
@@ -99,7 +115,7 @@ export default function Navbar({ theme, onToggleTheme }) {
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
             transition={{ duration: 0.3 }}
-            aria-label="Menú móvil"
+            aria-label={t.nav.mobileMenu}
           >
             {links.map((l, i) => (
               <motion.a

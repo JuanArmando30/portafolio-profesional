@@ -22,12 +22,13 @@ const THEMES = {
 /**
  * Fondo ASCII animado (GradientASCII de React Bits) que cubre toda la pantalla.
  * Para mantener el contraste se usa un velo del color del tema (no negro):
- * suave detrás del texto del inicio y algo más marcado al hacer scroll.
+ * más fuerte detrás del texto del inicio y uniforme (ligero) al hacer scroll.
  */
 export default function Background({ theme }) {
   const t = THEMES[theme === 'light' ? 'light' : 'dark']
   const { scrollY } = useScroll()
   const dim = useTransform(scrollY, [0, 700], [0, 1])
+  const scrim = useTransform(scrollY, [0, 700], [1, 0.25])
 
   return (
     <div className="bg" aria-hidden="true">
@@ -49,7 +50,7 @@ export default function Background({ theme }) {
         clickEffect="wave"
         fontFamily={FONT}
       />
-      <div className="bg__scrim" />
+      <motion.div className="bg__scrim" style={{ opacity: scrim }} />
       <motion.div className="bg__dim" style={{ opacity: dim }} />
     </div>
   )

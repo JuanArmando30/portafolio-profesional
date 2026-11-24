@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile } from '../data/portfolio'
 import { Magnetic } from './Motion'
 import ScrambleName from './ScrambleName'
+import { useLang } from '../i18n'
 import { ArrowIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -13,6 +14,7 @@ const fadeUp = (delay) => ({
 })
 
 export default function Hero() {
+  const { t } = useLang()
   const [photoOk, setPhotoOk] = useState(true)
   const { scrollY } = useScroll()
   const yText = useTransform(scrollY, [0, 600], [0, 120])
@@ -24,7 +26,7 @@ export default function Hero() {
       <div className="container hero__grid">
         <motion.div className="hero__text" style={{ y: yText, opacity: fade }}>
           <h1 className="hero__title">
-            <motion.span className="hero__hello" {...fadeUp(0.5)}>Hola, soy</motion.span>
+            <motion.span className="hero__hello" {...fadeUp(0.5)}>{t.hero.hello}</motion.span>
             <motion.span
               className="hero__name"
               initial={{ opacity: 0 }}
@@ -41,7 +43,7 @@ export default function Hero() {
           </motion.p>
 
           <motion.p className="hero__bio" {...fadeUp(1.05)}>
-            {profile.bio.map((part, i) =>
+            {t.hero.bio.map((part, i) =>
               typeof part === 'string' ? part : <span key={i} className="hl">{part.hl}</span>
             )}
           </motion.p>
@@ -49,18 +51,18 @@ export default function Hero() {
           <motion.div className="hero__cta" {...fadeUp(1.15)}>
             <Magnetic>
               <a className="btn btn--primary" href="#proyectos">
-                Ver proyectos <ArrowIcon />
+                {t.hero.viewProjects} <ArrowIcon />
               </a>
             </Magnetic>
             <Magnetic>
               <a className="btn btn--ghost" href="#contacto">
-                <MailIcon /> Contáctame
+                <MailIcon /> {t.hero.contact}
               </a>
             </Magnetic>
             {profile.cv && (
               <Magnetic>
                 <a className="btn btn--ghost" href={profile.cv} download>
-                  <DownloadIcon /> CV
+                  <DownloadIcon /> {t.hero.cv}
                 </a>
               </Magnetic>
             )}
@@ -71,7 +73,7 @@ export default function Hero() {
             {profile.linkedin && (
               <a href={profile.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn"><LinkedInIcon /></a>
             )}
-            <a href={`mailto:${profile.email}`} aria-label="Correo"><MailIcon /></a>
+            <a href={`mailto:${profile.email}`} aria-label={t.hero.email}><MailIcon /></a>
             <span className="hero__social-line" />
           </motion.div>
         </motion.div>
@@ -91,9 +93,9 @@ export default function Hero() {
             </div>
             <div className="avatar__inner">
               {photoOk ? (
-                <img src={profile.photo} alt={`Foto de ${profile.fullName}`} onError={() => setPhotoOk(false)} />
+                <img src={profile.photo} alt={`${t.hero.photoAlt} ${profile.fullName}`} onError={() => setPhotoOk(false)} />
               ) : (
-                <span className="avatar__initials">{profile.initials}</span>
+                <span className="avatar__initials">{profile.brand}</span>
               )}
             </div>
             <motion.span
@@ -101,21 +103,21 @@ export default function Hero() {
               animate={{ y: [0, -10, 0] }}
               transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
             >
-              {'</>'} Full Stack
+              {t.hero.tags[0]}
             </motion.span>
             <motion.span
               className="float-tag float-tag--2"
               animate={{ y: [0, 10, 0] }}
               transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
             >
-              ☁ AWS
+              {t.hero.tags[1]}
             </motion.span>
             <motion.span
               className="float-tag float-tag--3"
               animate={{ y: [0, -8, 0] }}
               transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
             >
-              ⚡ IoT + IA
+              {t.hero.tags[2]}
             </motion.span>
           </motion.div>
         </motion.div>
@@ -124,7 +126,7 @@ export default function Hero() {
       <motion.a
         href="#proyectos"
         className="scroll-hint"
-        aria-label="Bajar a proyectos"
+        aria-label={t.hero.scroll}
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.8 }}

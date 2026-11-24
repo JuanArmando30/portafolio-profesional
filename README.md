@@ -18,20 +18,28 @@ npm run preview  # abre http://localhost:4173
 
 ## Editar el contenido
 
-Todo el texto (proyectos, tecnologías, experiencia, enlaces) está en
-[`src/data/portfolio.js`](src/data/portfolio.js). No necesitas tocar los componentes.
-
-- **Foto:** guárdala como `public/img/foto.jpg` (cuadrada). Si no existe se muestran tus iniciales.
+- **Textos (español e inglés):** [`src/data/i18n.js`](src/data/i18n.js). Cada texto existe en `es` y `en`; cambia ambos.
+- **Enlaces, proyectos y tecnologías:** [`src/data/portfolio.js`](src/data/portfolio.js).
+- **Proyectos:** en `projects` llena `code` (repositorio) y `demo` (sitio en vivo). Si quedan vacíos,
+  el botón se muestra deshabilitado. Para la galería del modal, guarda capturas en
+  `public/img/proyectos/` y agrégalas en `images`, por ejemplo `images: ['img/proyectos/vg-1.jpg']`.
+  Mientras no haya capturas se muestra una ilustración animada.
+- **Certificaciones:** en `certifications` agrega `image` (imagen del certificado en
+  `public/certificados/`, se abre en grande con «Ver certificado») y/o `url` (enlace de
+  verificación, por ejemplo Credly) para el botón «Verificar».
+- **Foto:** guárdala como `public/img/foto.jpg` (cuadrada). Si no existe se muestran las letras JACR.
 - **CV:** copia `cv.pdf` a `public/` y escribe `cv: 'cv.pdf'` en `profile`.
 - **LinkedIn:** agrega la URL en `profile.linkedin`.
+- **Logotipo / favicon:** `public/favicon.svg` (más `favicon-32.png`, `apple-touch-icon.png` e `icon-512.png`).
 
 ## Estructura
 
 ```
 src/
-  data/portfolio.js     ← contenido
-  components/           ← secciones (Hero, Projects, Tech, Experience, Contact…)
-  hooks/useTypewriter.js
+  data/i18n.js          ← textos en español e inglés
+  data/portfolio.js     ← enlaces, proyectos, íconos y skills
+  i18n.jsx              ← cambio de idioma (se guarda en el navegador)
+  components/           ← secciones (Hero, Projects, ProjectModal, Tech, Experience, Contact…)
   index.css             ← estilos y paleta de colores (variables al inicio)
 .github/workflows/deploy.yml  ← publicación automática en GitHub Pages
 ```

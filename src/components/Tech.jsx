@@ -1,6 +1,8 @@
 import { motion } from 'framer-motion'
-import { customIcons, softSkills, stacks } from '../data/portfolio'
+import { stacks } from '../data/portfolio'
+import { useLang } from '../i18n'
 import { Reveal, SectionHead, Stagger, StaggerItem, TiltCard } from './Motion'
+import TechIcon, { useTechLabel } from './TechIcon'
 
 const stroke = { fill: 'none', stroke: 'currentColor', strokeWidth: 1.8, strokeLinecap: 'round', strokeLinejoin: 'round' }
 const categoryIcons = {
@@ -18,32 +20,26 @@ const categoryIcons = {
  */
 const perRow = (count, max) => Math.ceil(count / Math.ceil(count / max))
 
-function TechLogo({ item }) {
-  if (item.svg) return <span className="skill__logo" dangerouslySetInnerHTML={{ __html: customIcons[item.svg] }} />
-  return <img className={`skill__logo ${item.invert ? 'inv' : ''}`} src={item.img} alt="" loading="lazy" width="36" height="36" />
-}
-
 export default function Tech() {
+  const { t } = useLang()
+  const label = useTechLabel()
+
   return (
     <section className="section section--alt" id="tecnologias">
       <div className="container">
-        <SectionHead
-          eyebrow="02 · Tecnologías"
-          title="Mi stack tecnológico"
-          lead="Trabajo en todo el ciclo de una aplicación: interfaz, lógica de negocio, datos e infraestructura."
-        />
+        <SectionHead eyebrow={t.tech.eyebrow} title={t.tech.title} lead={t.tech.lead} />
 
         <Stagger className="skills" stagger={0.1}>
           {stacks.map((s, idx) => (
-            <StaggerItem key={s.name} className={`skills__cell ${s.wide ? 'skills__cell--wide' : ''}`}>
+            <StaggerItem key={s.id} className={`skills__cell ${s.wide ? 'skills__cell--wide' : ''}`}>
               <TiltCard className="skill-box" max={3}>
                 <header className="skill-box__head">
                   <span className="skill-box__icon">
                     <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true"><g {...stroke}>{categoryIcons[s.icon]}</g></svg>
                   </span>
                   <div>
-                    <h3>{s.name}</h3>
-                    <p>{s.desc}</p>
+                    <h3>{t.tech.stacks[s.id].name}</h3>
+                    <p>{t.tech.stacks[s.id].desc}</p>
                   </div>
                   <span className="skill-box__num mono">0{idx + 1}</span>
                 </header>
@@ -56,17 +52,17 @@ export default function Tech() {
                     '--pr-m': perRow(s.items.length, 4),
                   }}
                 >
-                  {s.items.map((item, i) => (
+                  {s.items.map((name, i) => (
                     <motion.li
-                      key={item.name}
+                      key={name}
                       className="skill"
                       initial={{ opacity: 0, y: 14 }}
                       whileInView={{ opacity: 1, y: 0 }}
                       viewport={{ once: true }}
                       transition={{ delay: 0.15 + i * 0.04, duration: 0.45, ease: [0.22, 1, 0.36, 1] }}
                     >
-                      <TechLogo item={item} />
-                      <span>{item.name}</span>
+                      <TechIcon name={name} className="skill__logo" />
+                      <span>{label(name)}</span>
                     </motion.li>
                   ))}
                 </ul>
@@ -76,9 +72,9 @@ export default function Tech() {
         </Stagger>
 
         <Reveal className="soft">
-          <h3>Además</h3>
+          <h3>{t.tech.also}</h3>
           <ul>
-            {softSkills.map(([b, rest]) => (
+            {t.tech.soft.map(([b, rest]) => (
               <li key={b}><strong>{b}</strong>{rest}</li>
             ))}
           </ul>

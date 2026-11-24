@@ -1,6 +1,6 @@
 // =========================================================
-//  Todo el contenido del portafolio vive aquí.
-//  Edita este archivo para cambiar textos, proyectos o enlaces.
+//  Datos que NO dependen del idioma: enlaces, íconos y listas.
+//  Los textos en español e inglés están en ./i18n.js
 // =========================================================
 
 const DEVICON = 'https://cdn.jsdelivr.net/gh/devicons/devicon@v2.16.0/icons'
@@ -9,145 +9,53 @@ const dev = (name, file = `${name}-original`) => `${DEVICON}/${name}/${file}.svg
 export const profile = {
   name: 'Juan Armando',
   fullName: 'Juan Armando Castillo Rodríguez',
-  initials: 'JC',
-  logo: 'juan',
-  role: 'Ingeniero en Sistemas Computacionales',
+  brand: 'JACR',
   tagline: 'Software Developer & Data Analyst',
-  bio: [
-    'Desarrollador de software enfocado en ',
-    { hl: 'análisis de datos' },
-    ' y soluciones tecnológicas. Trabajo con desarrollo web full stack, Python, SQL, AWS, Excel, Power BI y redes para ',
-    { hl: 'optimizar procesos mediante la tecnología' },
-    '. Busco sumarme a proyectos innovadores donde aportar una visión analítica y soluciones eficientes mientras sigo creciendo técnicamente. Me distinguen el ',
-    { hl: 'pensamiento crítico, la iniciativa y el aprendizaje autónomo' },
-    '.',
-  ],
   email: 'Juanarmandoc11@gmail.com',
   github: 'https://github.com/JuanArmando30',
   linkedin: '', // ej. 'https://www.linkedin.com/in/tu-usuario'
   cv: '', // ej. 'cv.pdf' (colócalo en /public)
-  photo: 'img/foto.jpg', // coloca tu foto en /public/img/foto.jpg
+  photo: 'img/foto.jpeg', // coloca tu foto en /public/img/foto.jpg
 }
 
-export const featured = {
-  badge: 'Institución educativa · En producción',
-  title: 'Sistema Integral VG — Comedor y Biblioteca escolar',
-  description:
-    'Sistema web que digitaliza la administración del comedor y la biblioteca de una escuela. Reemplaza las listas en papel por un control con códigos QR: cada alumno tiene su credencial y su entrada se registra con la cámara en segundos.',
-  points: [
-    ['4 roles', ' con permisos propios: administrador, cajero, bibliotecario y vocal de grupo.'],
-    ['QR con cámara', ' para registrar entradas, con generación e impresión masiva de credenciales.'],
-    ['Dashboard con gráficas', ', pagos de alumnos, control de adeudos y gastos.'],
-    ['Biblioteca', ': catálogo de libros, préstamos y devoluciones.'],
-    ['Reportes semanales', ' y exportación a Excel/CSV.'],
-    ['Seguridad', ': contraseñas cifradas, sesiones verificadas y HTTPS forzado.'],
-  ],
-  tags: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap 5', 'ApexCharts', 'jsQR', 'PhpSpreadsheet', 'Git'],
-  note: 'Código privado · sistema en uso por la escuela',
-}
-
-export const categories = ['Todos', 'Web', 'IoT e IA', 'Datos', 'Algoritmos']
-
+// ---------------------------------------------------------
+//  Proyectos (los textos de cada uno están en i18n.js → projectText)
+//  code:   URL del repositorio ('' = se muestra como no disponible)
+//  demo:   URL del proyecto en vivo ('' = se muestra como no disponible)
+//  images: capturas en /public/img/proyectos/ (ej. 'img/proyectos/vg-1.jpg').
+//          Mientras esté vacío se muestra una ilustración animada.
+//  tech:   nombres de techIcons (abajo); en la tarjeta se ven los primeros 5
+// ---------------------------------------------------------
 export const projects = [
   {
+    id: 'vg',
+    icon: 'QR',
+    code: '', // repositorio privado
+    demo: '',
+    images: [],
+    tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap', 'ApexCharts', 'jsQR', 'PhpSpreadsheet', 'Git'],
+  },
+  {
+    id: 'iot',
     icon: 'IoT',
-    badge: 'Desplegado en AWS',
-    category: 'IoT e IA',
-    title: 'Excavadora IoT controlada por internet',
-    description:
-      'API REST + WebSocket que controla y monitorea en tiempo real un vehículo con ESP32. Interfaz web con 5 modos de manejo: botones, joystick, voz, giroscopio del celular y gestos de la mano con IA.',
-    points: [
-      "EC2 + RDS, HTTPS/WSS con Caddy y Let's Encrypt",
-      '21 procedimientos almacenados, documentación Swagger',
-      'Monitoreo en vivo e historial de movimientos',
-    ],
-    tags: ['Python', 'FastAPI', 'WebSocket', 'AWS', 'MySQL', 'ESP32', 'MediaPipe'],
     code: 'https://github.com/JuanArmando30/vehiculo_oit',
-    demo: '', // 'https://vehiculos-juan.duckdns.org/docs' cuando la instancia esté encendida
-    big: true,
+    demo: '', // 'https://vehiculos-juan.duckdns.org/docs' cuando la instancia EC2 esté encendida
+    images: [],
+    tech: ['Python', 'FastAPI', 'WebSocket', 'AWS', 'MySQL', 'ESP32', 'MediaPipe', 'HTTPS · Caddy', 'Swagger'],
   },
   {
+    id: 'eco',
     icon: 'IA',
-    badge: 'Presentado en InnovaTecNM',
-    category: 'IoT e IA',
-    title: 'EcoBot — Clasificador inteligente de residuos',
-    description:
-      'Prototipo que identifica basura con visión por computadora y la deposita en el contenedor correcto. Modelo entrenado con un dataset propio; el resultado se envía a un ESP32 que mueve los servomotores.',
-    points: [
-      '4 categorías: orgánico, inorgánico, metal y PET',
-      'Confirmación por tiempo para evitar falsas detecciones',
-      'Presentado con modelo de negocio en InnovaTecNM',
-    ],
-    tags: ['Python', 'TensorFlow Lite', 'OpenCV', 'ESP32', 'Arduino'],
-    big: true,
-  },
-  {
-    icon: 'C++',
-    badge: 'Algoritmos · Optimización',
-    category: 'Algoritmos',
-    title: 'Agente Viajero — Comparador de algoritmos',
-    description:
-      'Resuelve el problema del agente viajero con fuerza bruta multihilo, algoritmo voraz y algoritmo genético, y compara costo y tiempo de cada uno. Lee matrices desde Excel sin librerías externas.',
-    points: ['Núcleo en C++17 optimizado con hilos y poda', 'Interfaz web servida por un servidor en Python'],
-    tags: ['C++17', 'Python', 'JavaScript', 'Algoritmos'],
-    big: true,
-  },
-  {
-    icon: 'BI',
-    badge: 'Inteligencia de negocios',
-    category: 'Datos',
-    title: 'Data Warehouse y tableros en Power BI',
-    description:
-      'Diseño de un almacén de datos con modelo estrella, transformación de datos y generación de cubos para análisis de ventas. Tableros interactivos para la toma de decisiones.',
-    points: ['Modelado dimensional (hechos y dimensiones)', 'Limpieza y transformación con Power Query'],
-    tags: ['SQL', 'Power BI', 'Data Warehouse', 'Excel'],
-    big: true,
-  },
-  {
-    icon: 'API',
-    category: 'Web',
-    title: 'Mundo-Reserva',
-    description: 'Sitio de reservaciones de propiedades que consume APIs REST hechas en ASP.NET Web API.',
-    tags: ['C#', 'ASP.NET', 'JavaScript'],
-  },
-  {
-    icon: 'WEB',
-    category: 'Web',
-    title: 'Tienda en línea con servicio web',
-    description: 'Carrito de compras, CRUD de usuarios con permisos y menú en PDF. Base de datos en AWS RDS, probado con Postman.',
-    tags: ['PHP', 'MySQL', 'AWS'],
-  },
-  {
-    icon: 'LEX',
-    category: 'Algoritmos',
-    title: 'Analizador léxico y semántico',
-    description: 'Aplicación de escritorio que tokeniza y valida código fuente, con tabla de símbolos.',
-    tags: ['Java', 'Swing', 'Compiladores'],
-  },
-  {
-    icon: '3D',
-    category: 'Web',
-    title: 'Gráficos 2D, 3D y VR',
-    description: 'Animaciones y colisiones con Canvas, escenas 3D con Three.js y pruebas en realidad virtual.',
-    tags: ['JavaScript', 'Canvas', 'Three.js'],
-  },
-  {
-    icon: 'NET',
-    category: 'Algoritmos',
-    title: 'Calculadora de subneteo',
-    description: 'Herramienta que calcula subredes VLSM, máscaras y wildcards para diseñar redes.',
-    tags: ['Python', 'Redes'],
-  },
-  {
-    icon: 'SIM',
-    category: 'Datos',
-    title: 'Simulación de procesos',
-    description: 'Modelo de un proceso real con 4 alternativas de mejora, evaluadas con análisis estadístico.',
-    tags: ['FlexSim', 'Estadística'],
+    code: '',
+    demo: '',
+    images: [],
+    tech: ['Python', 'TensorFlow Lite', 'OpenCV', 'ESP32', 'Arduino'],
   },
 ]
 
-// Íconos propios para tecnologías sin logo en devicon
+// ---------------------------------------------------------
+//  Íconos propios para tecnologías sin logo en devicon
+// ---------------------------------------------------------
 export const customIcons = {
   websocket:
     '<svg viewBox="0 0 48 48" fill="none" stroke="#38BDF8" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M8 17h30l-7-7M40 31H10l7 7"/></svg>',
@@ -168,144 +76,89 @@ export const customIcons = {
   ipv6: '<svg viewBox="0 0 48 48"><rect x="4" y="12" width="40" height="24" rx="6" fill="none" stroke="#38BDF8" stroke-width="2.5"/><text x="24" y="28.5" text-anchor="middle" font-family="JetBrains Mono, monospace" font-weight="700" font-size="11" fill="#38BDF8">IPv6</text></svg>',
   security:
     '<svg viewBox="0 0 48 48" fill="none" stroke-width="2.5" stroke-linejoin="round"><path d="M24 5 8 11v12c0 10 7 17 16 20 9-3 16-10 16-20V11L24 5Z" stroke="#EF4444"/><path d="m17 24 5 5 9-10" stroke="#60A5FA" stroke-linecap="round"/></svg>',
+  apexcharts:
+    '<svg viewBox="0 0 48 48" fill="none" stroke-linecap="round" stroke-linejoin="round"><path d="M6 42h36" stroke="#94A3B8" stroke-width="2.5"/><path d="M8 36 19 22l8 8 13-18" stroke="#00E396" stroke-width="3.5"/><circle cx="19" cy="22" r="3.5" fill="#008FFB"/><circle cx="40" cy="12" r="3.5" fill="#008FFB"/></svg>',
+  qr: '<svg viewBox="0 0 48 48" fill="#38BDF8"><path d="M6 6h15v15H6zm4 4v7h7v-7zM27 6h15v15H27zm4 4v7h7v-7zM6 27h15v15H6zm4 4v7h7v-7z"/><path d="M27 27h6v6h-6zm9 0h6v6h-6zm-9 9h6v6h-6zm9 0h6v6h-6z" opacity=".7"/></svg>',
+  spreadsheet:
+    '<svg viewBox="0 0 48 48" fill="none"><rect x="8" y="6" width="32" height="36" rx="4" stroke="#8892BF" stroke-width="2.5"/><path d="M8 16h32M8 26h32M8 34h32M20 6v36" stroke="#8892BF" stroke-width="2"/><rect x="21" y="17" width="18" height="8" fill="#4F5B93" opacity=".55"/></svg>',
 }
 
-// Cada categoría es un cuadro. icon: server | chart | layout | cloud | chip | shield
-// wide: true hace que el cuadro ocupe dos columnas en escritorio.
-// img: URL de imagen · svg: clave en customIcons · invert: logo oscuro que se aclara en tema oscuro
+// ---------------------------------------------------------
+//  Registro de tecnologías → ícono.
+//  img: URL de imagen · svg: clave en customIcons · invert: logo oscuro que se aclara en tema oscuro
+//  Si el nombre se traduce, la traducción está en i18n.js → techLabels
+// ---------------------------------------------------------
+export const techIcons = {
+  HTML5: { img: dev('html5') },
+  CSS3: { img: dev('css3') },
+  JavaScript: { img: dev('javascript') },
+  React: { img: dev('react') },
+  Bootstrap: { img: dev('bootstrap') },
+  jQuery: { img: dev('jquery') },
+  'Three.js': { img: dev('threejs'), invert: true },
+  Python: { img: dev('python') },
+  PHP: { img: dev('php') },
+  FastAPI: { img: dev('fastapi') },
+  'C#': { img: dev('csharp') },
+  'ASP.NET': { img: dev('dotnetcore') },
+  Java: { img: dev('java') },
+  'C++': { img: dev('cplusplus') },
+  WebSocket: { svg: 'websocket' },
+  Apache: { img: dev('apache') },
+  MySQL: { img: dev('mysql'), invert: true },
+  'Power BI': { svg: 'powerbi' },
+  Excel: { svg: 'excel' },
+  'Data Warehouse': { svg: 'dw' },
+  NumPy: { img: dev('numpy') },
+  AWS: { img: dev('amazonwebservices', 'amazonwebservices-original-wordmark'), invert: true },
+  Git: { img: dev('git') },
+  GitHub: { img: dev('github'), invert: true },
+  Postman: { img: dev('postman') },
+  Swagger: { img: dev('swagger') },
+  'VS Code': { img: dev('vscode') },
+  'HTTPS · Caddy': { svg: 'https' },
+  'Windows Server': { img: dev('windows11') },
+  ESP32: { svg: 'esp32' },
+  Arduino: { img: dev('arduino') },
+  TensorFlow: { img: dev('tensorflow') },
+  'TensorFlow Lite': { img: dev('tensorflow') },
+  OpenCV: { img: dev('opencv') },
+  MediaPipe: { svg: 'mediapipe' },
+  LabVIEW: { img: dev('labview') },
+  'Packet Tracer': { svg: 'cisco' },
+  VLAN: { svg: 'vlan' },
+  IPv6: { svg: 'ipv6' },
+  Cybersecurity: { svg: 'security' },
+  ApexCharts: { svg: 'apexcharts' },
+  jsQR: { svg: 'qr' },
+  PhpSpreadsheet: { svg: 'spreadsheet' },
+}
+
+// ---------------------------------------------------------
+//  Skills: cada categoría es un cuadro (nombre y descripción en i18n.js → tech.stacks)
+//  icon: server | chart | layout | cloud | chip | shield
+//  wide: true ocupa dos columnas en escritorio
+// ---------------------------------------------------------
 export const stacks = [
-  {
-    name: 'Backend',
-    icon: 'server',
-    desc: 'APIs REST, lógica de negocio y servicios en tiempo real.',
-    wide: true,
-    items: [
-      { name: 'Python', img: dev('python') },
-      { name: 'PHP', img: dev('php') },
-      { name: 'FastAPI', img: dev('fastapi') },
-      { name: 'C#', img: dev('csharp') },
-      { name: 'ASP.NET', img: dev('dotnetcore') },
-      { name: 'Java', img: dev('java') },
-      { name: 'C++', img: dev('cplusplus') },
-      { name: 'WebSocket', svg: 'websocket' },
-      { name: 'Apache', img: dev('apache') },
-    ],
-  },
-  {
-    name: 'Datos y análisis',
-    icon: 'chart',
-    desc: 'Modelado, consultas y tableros para decidir con datos.',
-    items: [
-      { name: 'MySQL', img: dev('mysql') },
-      { name: 'Power BI', svg: 'powerbi' },
-      { name: 'Excel', svg: 'excel' },
-      { name: 'Data Warehouse', svg: 'dw' },
-      { name: 'NumPy', img: dev('numpy') },
-    ],
-  },
-  {
-    name: 'Frontend',
-    icon: 'layout',
-    desc: 'Interfaces claras, responsivas y animadas.',
-    wide: true,
-    items: [
-      { name: 'HTML5', img: dev('html5') },
-      { name: 'CSS3', img: dev('css3') },
-      { name: 'JavaScript', img: dev('javascript') },
-      { name: 'React', img: dev('react') },
-      { name: 'Bootstrap', img: dev('bootstrap') },
-      { name: 'jQuery', img: dev('jquery') },
-      { name: 'Three.js', img: dev('threejs'), invert: true },
-    ],
-  },
-  {
-    name: 'IoT e Inteligencia Artificial',
-    icon: 'chip',
-    desc: 'Hardware conectado y visión por computadora.',
-    items: [
-      { name: 'ESP32', svg: 'esp32' },
-      { name: 'Arduino', img: dev('arduino') },
-      { name: 'TensorFlow', img: dev('tensorflow') },
-      { name: 'OpenCV', img: dev('opencv') },
-      { name: 'MediaPipe', svg: 'mediapipe' },
-      { name: 'LabVIEW', img: dev('labview') },
-    ],
-  },
-  {
-    name: 'Redes y seguridad',
-    icon: 'shield',
-    desc: 'Diseño de redes y buenas prácticas de seguridad.',
-    items: [
-      { name: 'Packet Tracer', svg: 'cisco' },
-      { name: 'VLAN', svg: 'vlan' },
-      { name: 'IPv6', svg: 'ipv6' },
-      { name: 'Ciberseguridad', svg: 'security' },
-    ],
-  },
-  {
-    name: 'Cloud y herramientas',
-    icon: 'cloud',
-    desc: 'Despliegue, control de versiones, pruebas y documentación.',
-    wide: true,
-    items: [
-      { name: 'AWS', img: dev('amazonwebservices', 'amazonwebservices-original-wordmark'), invert: true },
-      { name: 'Git', img: dev('git') },
-      { name: 'GitHub', img: dev('github'), invert: true },
-      { name: 'Postman', img: dev('postman') },
-      { name: 'Swagger', img: dev('swagger') },
-      { name: 'VS Code', img: dev('vscode') },
-      { name: 'HTTPS · Caddy', svg: 'https' },
-      { name: 'Windows Server', img: dev('windows11') },
-    ],
-  },
+  { id: 'backend', icon: 'server', wide: true, items: ['Python', 'PHP', 'FastAPI', 'C#', 'ASP.NET', 'Java', 'C++', 'WebSocket', 'Apache'] },
+  { id: 'data', icon: 'chart', items: ['MySQL', 'Power BI', 'Excel', 'Data Warehouse', 'NumPy'] },
+  { id: 'frontend', icon: 'layout', wide: true, items: ['HTML5', 'CSS3', 'JavaScript', 'React', 'Bootstrap', 'jQuery', 'Three.js'] },
+  { id: 'iot', icon: 'chip', items: ['ESP32', 'Arduino', 'TensorFlow', 'OpenCV', 'MediaPipe', 'LabVIEW'] },
+  { id: 'net', icon: 'shield', items: ['Packet Tracer', 'VLAN', 'IPv6', 'Cybersecurity'] },
+  { id: 'cloud', icon: 'cloud', wide: true, items: ['AWS', 'Git', 'GitHub', 'Postman', 'Swagger', 'VS Code', 'HTTPS · Caddy', 'Windows Server'] },
 ]
 
-export const softSkills = [
-  ['Análisis de requerimientos', ' y modelado UML: casos de uso, clases y actividades.'],
-  ['Trato directo con usuarios', ': levantamiento de necesidades, capacitación y mejora continua.'],
-  ['Documentación clara', ': README, guías de despliegue y casos de prueba.'],
-]
-
-export const experience = [
-  {
-    date: '2026 — Actualidad',
-    title: 'Desarrollador Full Stack · Institución educativa',
-    description:
-      'Análisis, desarrollo, despliegue y soporte del sistema de comedor y biblioteca escolar. Trabajo directo con administración, caja y biblioteca para convertir procesos en papel en un sistema con roles, códigos QR y reportes.',
-    tags: ['PHP', 'MySQL', 'JavaScript', 'Hosting · HTTPS'],
-  },
-  {
-    date: '2026',
-    title: 'Backend, IoT y Cloud · Plataforma de control vehicular',
-    description:
-      'Diseño de la API en FastAPI, base de datos con 21 procedimientos almacenados y despliegue en AWS (EC2 + RDS) con HTTPS y WebSocket seguro; integración con ESP32 e interfaz web de control en tiempo real.',
-    tags: ['FastAPI', 'AWS', 'WebSocket', 'ESP32'],
-  },
-  {
-    date: '2026',
-    title: 'Visión por computadora · EcoBot (InnovaTecNM)',
-    description:
-      'Entrenamiento de un modelo de clasificación con un dataset propio, integración con hardware y presentación del proyecto con su modelo de negocio en el concurso InnovaTecNM.',
-    tags: ['TensorFlow Lite', 'OpenCV', 'ESP32'],
-  },
-  {
-    date: '2025 — 2026',
-    title: 'Desarrollo web y APIs REST',
-    description:
-      'Sitios y servicios web con PHP y ASP.NET Web API publicados en AWS: tienda en línea con carrito, sistema de reservaciones y administración de usuarios con permisos.',
-    tags: ['PHP', 'C#', 'AWS RDS', 'Postman'],
-  },
-]
-
-export const education = {
-  title: 'Ingeniería en Sistemas Computacionales',
-  school: 'Tecnológico Nacional de México',
-  years: '2022 — 2026',
-}
-
+// ---------------------------------------------------------
+//  Certificaciones (el nombre de cada una está en i18n.js → education.certs)
+//  Para que se vea que SÍ las tienes, llena al menos uno de estos campos:
+//  image: imagen del certificado en /public/certificados/ (ej. 'certificados/python.jpg')
+//         → se abre en grande con el botón «Ver certificado»
+//  url:   enlace de verificación (Credly, Cisco NetAcad, PDF en Drive...) → botón «Verificar»
+//  year:  año de emisión (opcional)
+// ---------------------------------------------------------
 export const certifications = [
-  'Python Essentials 1 — Cisco Networking Academy',
-  'Getting Started with Cisco Packet Tracer — Cisco',
-  'Fundamentos de Ciberseguridad — Cisco',
-  'Curso MOOC — TecNM',
+  { id: 'python', issuer: 'Cisco Networking Academy', logo: 'cisco', year: '', image: '', url: '' },
+  { id: 'packet', issuer: 'Cisco Networking Academy', logo: 'cisco', year: '', image: '', url: '' },
+  { id: 'cyber', issuer: 'Cisco Networking Academy', logo: 'cisco', year: '', image: '', url: '' },
+  { id: 'mooc', issuer: 'TecNM', logo: 'tecnm', year: '', image: '', url: '' },
 ]

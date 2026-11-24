@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { profile } from '../data/portfolio'
+import { useLang } from '../i18n'
 import { ArrowUpIcon } from './Icons'
 
 /** Escribe un texto letra por letra cuando `start` es true. */
@@ -19,6 +20,7 @@ function useTyping(text, start, speed) {
  * Se puede saltar con un clic o cualquier tecla.
  */
 export function Intro({ onDone }) {
+  const { t } = useLang()
   const reduced = typeof window !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
   const [cmd, cmdDone] = useTyping('whoami', true, reduced ? 0 : 70)
   const [name, nameDone] = useTyping(profile.name, cmdDone, reduced ? 0 : 95)
@@ -48,7 +50,7 @@ export function Intro({ onDone }) {
     >
       <div className="intro__box">
         <p className="intro__cmd">
-          <span className="intro__user">{profile.logo}@portafolio</span>
+          <span className="intro__user">{profile.brand.toLowerCase()}@{t.intro.host}</span>
           <span className="intro__sep">:~$</span> {cmd}
           {active === 'cmd' && caret}
         </p>
@@ -68,7 +70,7 @@ export function Intro({ onDone }) {
         animate={{ opacity: 1 }}
         transition={{ delay: 1 }}
       >
-        [ clic o cualquier tecla para continuar ]
+        {t.intro.skip}
       </motion.p>
     </motion.div>
   )
@@ -76,6 +78,7 @@ export function Intro({ onDone }) {
 
 /** Botón flotante para volver arriba. */
 export function BackToTop() {
+  const { t } = useLang()
   const [show, setShow] = useState(false)
   useEffect(() => {
     const onScroll = () => setShow(window.scrollY > 700)
@@ -89,7 +92,7 @@ export function BackToTop() {
         <motion.a
           href="#inicio"
           className="to-top"
-          aria-label="Volver arriba"
+          aria-label={t.backToTop}
           initial={{ opacity: 0, scale: 0.5, y: 20 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.5, y: 20 }}
@@ -103,11 +106,12 @@ export function BackToTop() {
 }
 
 export function Footer() {
+  const { t } = useLang()
   return (
     <footer className="footer">
       <div className="container footer__inner">
         <p>© {new Date().getFullYear()} {profile.fullName}</p>
-        <p className="footer__made">Hecho con React + Framer Motion</p>
+        <p className="footer__made">{t.footer.made}</p>
       </div>
     </footer>
   )

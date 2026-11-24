@@ -1,10 +1,12 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'framer-motion'
 import { profile } from '../data/portfolio'
+import { useLang } from '../i18n'
 import { Magnetic, Reveal, SplitText } from './Motion'
 import { CheckIcon, CopyIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
 
 export default function Contact() {
+  const { t } = useLang()
   const [copied, setCopied] = useState(false)
 
   const copy = async () => {
@@ -23,14 +25,14 @@ export default function Contact() {
         <Reveal className="cta">
           <div className="cta__border" aria-hidden="true" />
           <div className="cta__content">
-            <p className="eyebrow"><span className="eyebrow__line" /> 04 · Contacto</p>
-            <h2><SplitText text="¿Trabajamos juntos?" /></h2>
-            <p>¿Tienes una vacante o un proyecto en mente? Escríbeme y platiquemos cómo puedo ayudarte.</p>
+            <p className="eyebrow"><span className="eyebrow__line" /> {t.contact.eyebrow}</p>
+            <h2><SplitText key={t.contact.title} text={t.contact.title} /></h2>
+            <p>{t.contact.lead}</p>
 
             <div className="cta__actions">
               <Magnetic>
                 <a className="btn btn--primary btn--lg" href={`mailto:${profile.email}`}>
-                  <MailIcon /> Enviar correo
+                  <MailIcon /> {t.contact.send}
                 </a>
               </Magnetic>
               <Magnetic>
@@ -44,7 +46,7 @@ export default function Contact() {
                       transition={{ duration: 0.18 }}
                       style={{ display: 'inline-flex', alignItems: 'center', gap: '.5rem' }}
                     >
-                      {copied ? <><CheckIcon /> ¡Copiado!</> : <><CopyIcon /> Copiar correo</>}
+                      {copied ? <><CheckIcon /> {t.contact.copied}</> : <><CopyIcon /> {t.contact.copy}</>}
                     </motion.span>
                   </AnimatePresence>
                 </button>

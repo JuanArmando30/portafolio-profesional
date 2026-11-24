@@ -161,8 +161,8 @@ export function SectionHead({ eyebrow, title, lead }) {
       <Reveal as="p" className="eyebrow" y={16}>
         <span className="eyebrow__line" /> {eyebrow}
       </Reveal>
-      <h2><SplitText text={title} /></h2>
-      {lead && <Reveal as="p" className="section__lead" delay={0.15}>{lead}</Reveal>}
+      <h2><SplitText key={title} text={title} /></h2>
+      {lead && <Reveal as="p" key={lead} className="section__lead" delay={0.15}>{lead}</Reveal>}
     </div>
   )
 }
