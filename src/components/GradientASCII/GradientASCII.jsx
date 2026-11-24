@@ -1,5 +1,6 @@
 // GradientASCII — de React Bits (https://reactbits.dev/backgrounds/gradient-ascii)
 // Autor: David Haz · Licencia: MIT + Commons Clause
+// Modificado: prop `fill` (intensidad mínima con ruido) para que el efecto cubra toda la pantalla.
 
 import { useEffect, useRef } from 'react';
 import './GradientASCII.css';
@@ -55,6 +56,7 @@ uniform vec4 uClicks[4];
 uniform int uClickEffect;
 uniform float uIntro;
 uniform float uFrame;
+uniform float uFill;
 in vec2 vUv;
 layout(location = 0) out vec4 outColor;
 layout(location = 1) out vec4 outAux;
@@ -188,6 +190,8 @@ void main() {
     }
   }
   vec2 t = clamp(shape.xy * mix(0.7, 1.0, reveal), 0.0, 1.0);
+  float floorValue = uFill * (0.7 + 0.6 * noise(q * 2.2 + uSeed + vec2(time * 0.15, -time * 0.1))) * reveal;
+  t = max(t, vec2(floorValue));
   vec4 mixed = mix(tone(t.x), tone(t.y), shape.z);
   vec3 color = encode(labToRgb(mixed.rgb));
   float alpha = mixed.a * reveal;
@@ -443,6 +447,7 @@ const GradientASCII = ({
   clickEffect = 'wave',
   intro = true,
   lightMode = false,
+  fill = 0,
   fontFamily = DEFAULT_FONT,
   dpr,
   className = '',
@@ -475,6 +480,7 @@ const GradientASCII = ({
     clickEffect: CLICK_EFFECTS[clickEffect] ?? 1,
     intro,
     lightMode,
+    fill: clamp(fill, 0, 1),
     fontFamily: fontFamily || DEFAULT_FONT,
     dpr
   };
@@ -650,6 +656,7 @@ const GradientASCII = ({
       gl.uniform1i(fu.uClickEffect, s.clickEffect);
       gl.uniform1f(fu.uIntro, introClock);
       gl.uniform1f(fu.uFrame, frameSeed);
+      gl.uniform1f(fu.uFill, s.fill);
       gl.drawArrays(gl.TRIANGLES, 0, 3);
 
       const glowing = s.glow > 0.001;

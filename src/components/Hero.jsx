@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile } from '../data/portfolio'
 import { Magnetic } from './Motion'
+import ScrambleName from './ScrambleName'
 import { ArrowIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
 
 const ease = [0.22, 1, 0.36, 1]
@@ -22,21 +23,15 @@ export default function Hero() {
     <section className="hero" id="inicio">
       <div className="container hero__grid">
         <motion.div className="hero__text" style={{ y: yText, opacity: fade }}>
-          {profile.available && (
-            <motion.p className="status-pill" {...fadeUp(0.5)}>
-              <span className="dot" /> Disponible para nuevos proyectos
-            </motion.p>
-          )}
-
           <h1 className="hero__title">
-            <motion.span className="hero__hello" {...fadeUp(0.6)}>Hola, soy</motion.span>
+            <motion.span className="hero__hello" {...fadeUp(0.5)}>Hola, soy</motion.span>
             <motion.span
-              className="grad grad--anim hero__name"
-              initial={{ opacity: 0, y: 40, scale: 0.95 }}
-              animate={{ opacity: 1, y: 0, scale: 1 }}
-              transition={{ duration: 1, delay: 0.75, ease }}
+              className="hero__name"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.4, delay: 0.55 }}
             >
-              {profile.name}
+              <ScrambleName text={profile.name} delay={650} />
             </motion.span>
           </h1>
 

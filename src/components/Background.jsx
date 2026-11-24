@@ -3,33 +3,43 @@ import GradientASCII from './GradientASCII/GradientASCII'
 
 const FONT = '"JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Consolas, monospace'
 
-// Rampa de color: del tono más tenue al más brillante
-const PALETTES = {
-  dark: ['#06303a', '#0e7490', '#22d3ee', '#4ade80'],
-  light: ['#a5f3fc', '#22d3ee', '#0e7490', '#047857'],
+// Ajustes por tema. Claro = colores por defecto de React Bits.
+const THEMES = {
+  dark: {
+    colors: ['#1e3fd8', '#3b82f6', '#a5d8ff', '#38bdf8'],
+    glyphOpacity: 0.8,
+    gradientOpacity: 0.55,
+    fill: 0.32,
+  },
+  light: {
+    colors: ['#1e3fd8', '#f6f8ff', '#a5d8ff', '#38bdf8'],
+    glyphOpacity: 0.85,
+    gradientOpacity: 0.75,
+    fill: 0.3,
+  },
 }
 
 /**
- * Fondo ASCII animado (GradientASCII de React Bits) con capas de contraste:
- * - un velo lateral que oscurece la zona donde va el texto
- * - un velo extra que aparece al hacer scroll para que el contenido se lea bien
+ * Fondo ASCII animado (GradientASCII de React Bits) que cubre toda la pantalla.
+ * Para mantener el contraste se usa un velo del color del tema (no negro):
+ * suave detrás del texto del inicio y algo más marcado al hacer scroll.
  */
 export default function Background({ theme }) {
-  const light = theme === 'light'
+  const t = THEMES[theme === 'light' ? 'light' : 'dark']
   const { scrollY } = useScroll()
   const dim = useTransform(scrollY, [0, 700], [0, 1])
 
   return (
     <div className="bg" aria-hidden="true">
       <GradientASCII
-        colors={PALETTES[light ? 'light' : 'dark']}
-        lightMode={light}
+        colors={t.colors}
         shape="horizon"
         cellSize={16}
         density={0.8}
-        glyphOpacity={light ? 0.55 : 0.75}
-        gradientOpacity={light ? 0.35 : 0.5}
-        glow={0.18}
+        glyphOpacity={t.glyphOpacity}
+        gradientOpacity={t.gradientOpacity}
+        fill={t.fill}
+        glow={0.2}
         flicker={0.25}
         softness={0.6}
         flow={0.6}

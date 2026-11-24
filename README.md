@@ -1,6 +1,6 @@
 # Portafolio profesional · Juan Armando Castillo
 
-Portafolio personal hecho con **React + Vite + Framer Motion**: estética de consola, paleta cian-verde, fondo ASCII animado, tema claro/oscuro y entrada tipo terminal.
+Portafolio personal hecho con **React + Vite + Framer Motion**: estética de consola, paleta azul, fondo ASCII animado, tema claro/oscuro y entrada tipo terminal.
 
 ## Ver el proyecto en tu computadora
 

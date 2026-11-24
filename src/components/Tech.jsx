@@ -12,6 +12,12 @@ const categoryIcons = {
   shield: <><path d="M12 3 4 6v6c0 5 3.5 8.5 8 9.5 4.5-1 8-4.5 8-9.5V6l-8-3Z" /><path d="m9 12 2 2 4-4" /></>,
 }
 
+/**
+ * Elementos por fila para que las filas queden parejas y sin huecos.
+ * Ej.: 9 elementos con máximo 5 por fila → 2 filas → 5 + 4 (los de la última fila se estiran).
+ */
+const perRow = (count, max) => Math.ceil(count / Math.ceil(count / max))
+
 function TechLogo({ item }) {
   if (item.svg) return <span className="skill__logo" dangerouslySetInnerHTML={{ __html: customIcons[item.svg] }} />
   return <img className={`skill__logo ${item.invert ? 'inv' : ''}`} src={item.img} alt="" loading="lazy" width="36" height="36" />
@@ -42,7 +48,14 @@ export default function Tech() {
                   <span className="skill-box__num mono">0{idx + 1}</span>
                 </header>
 
-                <ul className="skill-box__grid">
+                <ul
+                  className="skill-box__grid"
+                  style={{
+                    '--pr-d': perRow(s.items.length, s.wide ? 5 : 3),
+                    '--pr-t': perRow(s.items.length, 6),
+                    '--pr-m': perRow(s.items.length, 4),
+                  }}
+                >
                   {s.items.map((item, i) => (
                     <motion.li
                       key={item.name}
