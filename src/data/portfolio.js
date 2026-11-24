@@ -12,12 +12,7 @@ export const profile = {
   initials: 'JC',
   logo: 'juan',
   role: 'Ingeniero en Sistemas Computacionales',
-  typedRoles: [
-    'Desarrollador Full Stack',
-    'Backend & APIs REST',
-    'IoT + Inteligencia Artificial',
-    'Análisis de datos',
-  ],
+  tagline: 'Software Developer & Data Analyst',
   bio: [
     'Desarrollador de software enfocado en ',
     { hl: 'análisis de datos' },

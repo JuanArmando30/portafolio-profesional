@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { motion, useScroll, useTransform } from 'framer-motion'
 import { profile } from '../data/portfolio'
-import useTypewriter from '../hooks/useTypewriter'
 import { Magnetic } from './Motion'
 import { ArrowIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
 
@@ -13,7 +12,6 @@ const fadeUp = (delay) => ({
 })
 
 export default function Hero() {
-  const typed = useTypewriter(profile.typedRoles)
   const [photoOk, setPhotoOk] = useState(true)
   const { scrollY } = useScroll()
   const yText = useTransform(scrollY, [0, 600], [0, 120])
@@ -43,7 +41,7 @@ export default function Hero() {
           </h1>
 
           <motion.p className="hero__role" {...fadeUp(0.95)}>
-            <span className="mono hero__prompt">&gt;</span> {typed}
+            <span className="hero__prompt">&gt;</span> {profile.tagline}
             <span className="caret" aria-hidden="true" />
           </motion.p>
 

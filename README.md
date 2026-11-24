@@ -1,6 +1,6 @@
 # Portafolio profesional · Juan Armando Castillo
 
-Portafolio personal hecho con **React + Vite + Framer Motion**, con paleta verde azulado, tema claro/oscuro y animaciones.
+Portafolio personal hecho con **React + Vite + Framer Motion**: estética de consola, paleta cian-verde, fondo ASCII animado, tema claro/oscuro y entrada tipo terminal.
 
 ## Ver el proyecto en tu computadora
 
@@ -40,3 +40,10 @@ src/
 
 Cada `git push` a `main` publica el sitio en GitHub Pages mediante GitHub Actions
 (activa *Settings → Pages → Source: GitHub Actions* una sola vez).
+
+## Créditos
+
+El fondo animado usa [GradientASCII](https://reactbits.dev/backgrounds/gradient-ascii) de
+[React Bits](https://github.com/DavidHDev/react-bits) (David Haz · licencia MIT + Commons Clause),
+en [`src/components/GradientASCII/`](src/components/GradientASCII/). Sus colores y opacidades se
+ajustan en [`src/components/Background.jsx`](src/components/Background.jsx).

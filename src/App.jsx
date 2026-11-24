@@ -7,7 +7,7 @@ import Projects from './components/Projects'
 import Tech from './components/Tech'
 import Experience from './components/Experience'
 import Contact from './components/Contact'
-import { BackToTop, CursorGlow, Footer, Preloader } from './components/Extras'
+import { BackToTop, Footer, Intro } from './components/Extras'
 
 const initialTheme = () => document.documentElement.dataset.theme || 'dark'
 
@@ -24,9 +24,8 @@ export default function App() {
   return (
     // reducedMotion="user": respeta la preferencia del sistema de reducir animaciones
     <MotionConfig reducedMotion="user">
-      <AnimatePresence>{loading && <Preloader onDone={done} />}</AnimatePresence>
-      <Background />
-      <CursorGlow />
+      <AnimatePresence>{loading && <Intro onDone={done} />}</AnimatePresence>
+      <Background theme={theme} />
       {!loading && (
         <>
           <Navbar theme={theme} onToggleTheme={() => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))} />

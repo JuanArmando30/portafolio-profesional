@@ -1,60 +1,77 @@
 import { useEffect, useState } from 'react'
-import { AnimatePresence, motion, useMotionValue, useSpring } from 'framer-motion'
+import { AnimatePresence, motion } from 'framer-motion'
 import { profile } from '../data/portfolio'
 import { ArrowUpIcon } from './Icons'
 
-/** Pantalla de carga breve con el logotipo. */
-export function Preloader({ onDone }) {
+/** Escribe un texto letra por letra cuando `start` es true. */
+function useTyping(text, start, speed) {
+  const [count, setCount] = useState(0)
   useEffect(() => {
-    const t = setTimeout(onDone, 1300)
+    if (!start || count >= text.length) return
+    const t = setTimeout(() => setCount((c) => c + 1), speed)
     return () => clearTimeout(t)
+  }, [start, count, text, speed])
+  return [text.slice(0, count), count >= text.length]
+}
+
+/**
+ * Animación de entrada estilo terminal: escribe el nombre y debajo la leyenda.
+ * Se puede saltar con un clic o cualquier tecla.
+ */
+export function Intro({ onDone }) {
+  const reduced = typeof window !== 'undefined' && matchMedia('(prefers-reduced-motion: reduce)').matches
+  const [cmd, cmdDone] = useTyping('whoami', true, reduced ? 0 : 70)
+  const [name, nameDone] = useTyping(profile.name, cmdDone, reduced ? 0 : 95)
+  const [tag, tagDone] = useTyping(profile.tagline, nameDone, reduced ? 0 : 38)
+
+  useEffect(() => {
+    if (!tagDone) return
+    const t = setTimeout(onDone, reduced ? 200 : 900)
+    return () => clearTimeout(t)
+  }, [tagDone, onDone, reduced])
+
+  useEffect(() => {
+    window.addEventListener('keydown', onDone)
+    return () => window.removeEventListener('keydown', onDone)
   }, [onDone])
+
+  const active = !cmdDone ? 'cmd' : !nameDone ? 'name' : 'tag'
+  const caret = <span className="intro__caret" aria-hidden="true" />
 
   return (
     <motion.div
-      className="preloader"
+      className="intro"
+      onClick={onDone}
       exit={{ clipPath: 'inset(0 0 100% 0)' }}
       transition={{ duration: 0.8, ease: [0.76, 0, 0.24, 1] }}
+      role="presentation"
     >
-      <motion.div
-        className="preloader__logo"
-        initial={{ scale: 0.6, opacity: 0 }}
-        animate={{ scale: 1, opacity: 1 }}
-        transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
+      <div className="intro__box">
+        <p className="intro__cmd">
+          <span className="intro__user">{profile.logo}@portafolio</span>
+          <span className="intro__sep">:~$</span> {cmd}
+          {active === 'cmd' && caret}
+        </p>
+        <h1 className="intro__name">
+          <span className="grad">{name}</span>
+          {active === 'name' && caret}
+        </h1>
+        <p className="intro__tag">
+          {cmdDone && nameDone && <span className="intro__prompt">&gt; </span>}
+          {tag}
+          {active === 'tag' && caret}
+        </p>
+      </div>
+      <motion.p
+        className="intro__skip"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1 }}
       >
-        <svg viewBox="0 0 100 100" className="preloader__ring">
-          <motion.circle
-            cx="50" cy="50" r="44"
-            initial={{ pathLength: 0 }}
-            animate={{ pathLength: 1 }}
-            transition={{ duration: 1.1, ease: 'easeInOut' }}
-          />
-        </svg>
-        <span>{profile.initials}</span>
-      </motion.div>
+        [ clic o cualquier tecla para continuar ]
+      </motion.p>
     </motion.div>
   )
-}
-
-/** Halo de luz que sigue al cursor (solo en escritorio). */
-export function CursorGlow() {
-  const x = useMotionValue(-400)
-  const y = useMotionValue(-400)
-  const sx = useSpring(x, { stiffness: 120, damping: 20 })
-  const sy = useSpring(y, { stiffness: 120, damping: 20 })
-  const [enabled, setEnabled] = useState(false)
-
-  useEffect(() => {
-    const fine = matchMedia('(pointer: fine)').matches
-    setEnabled(fine)
-    if (!fine) return
-    const move = (e) => { x.set(e.clientX); y.set(e.clientY) }
-    window.addEventListener('pointermove', move, { passive: true })
-    return () => window.removeEventListener('pointermove', move)
-  }, [x, y])
-
-  if (!enabled) return null
-  return <motion.div className="cursor-glow" style={{ x: sx, y: sy }} aria-hidden="true" />
 }
 
 /** Botón flotante para volver arriba. */
@@ -90,7 +107,7 @@ export function Footer() {
     <footer className="footer">
       <div className="container footer__inner">
         <p>© {new Date().getFullYear()} {profile.fullName}</p>
-        <p className="mono footer__made">Hecho con React + Framer Motion</p>
+        <p className="footer__made">Hecho con React + Framer Motion</p>
       </div>
     </footer>
   )
