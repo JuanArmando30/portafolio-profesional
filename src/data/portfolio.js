@@ -13,7 +13,7 @@ export const profile = {
   tagline: 'Software Developer & Data Analyst',
   email: 'Juanarmandoc11@gmail.com',
   github: 'https://github.com/JuanArmando30',
-  linkedin: '', // ej. 'https://www.linkedin.com/in/tu-usuario'
+  linkedin: 'https://www.linkedin.com/in/juan-armando30',
   cv: '', // ej. 'cv.pdf' (colócalo en /public)
   photo: 'img/foto.jpeg', // coloca tu foto en /public/img/foto.jpg
 }

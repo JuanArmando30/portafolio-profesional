@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
-import { GitHubIcon, MoonIcon, SunIcon } from './Icons'
+import { GitHubIcon, LinkedInIcon, MoonIcon, SunIcon } from './Icons'
 import { profile } from '../data/portfolio'
 import { useLang } from '../i18n'
 
@@ -86,6 +86,11 @@ export default function Navbar({ theme, onToggleTheme }) {
           <a className="icon-btn" href={profile.github} target="_blank" rel="noopener" aria-label="GitHub">
             <GitHubIcon />
           </a>
+          {profile.linkedin && (
+            <a className="icon-btn" href={profile.linkedin} target="_blank" rel="noopener" aria-label="LinkedIn" title="LinkedIn">
+              <LinkedInIcon />
+            </a>
+          )}
           <button className="icon-btn lang-btn" onClick={toggleLang} aria-label={t.nav.lang} title={t.nav.lang}>
             <AnimatePresence mode="wait" initial={false}>
               <motion.span
