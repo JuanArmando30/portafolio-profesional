@@ -22,8 +22,7 @@ export const profile = {
 //  Proyectos (los textos de cada uno están en i18n.js → projectText)
 //  code:   URL del repositorio ('' = se muestra como no disponible)
 //  demo:   URL del proyecto en vivo ('' = se muestra como no disponible)
-//  images: capturas en /public/img/proyectos/ (ej. 'img/proyectos/vg-1.jpg').
-//          Mientras esté vacío se muestra una ilustración animada.
+//  Fotos y videos: cópialos en src/assets/proyectos/<id>/ y aparecen solos (ver data/media.js).
 //  tech:   nombres de techIcons (abajo); en la tarjeta se ven los primeros 5
 // ---------------------------------------------------------
 export const projects = [
@@ -32,7 +31,6 @@ export const projects = [
     icon: 'QR',
     code: '', // repositorio privado
     demo: '',
-    images: [],
     tech: ['PHP', 'MySQL', 'JavaScript', 'Bootstrap', 'ApexCharts', 'jsQR', 'PhpSpreadsheet', 'Git'],
   },
   {
@@ -40,7 +38,6 @@ export const projects = [
     icon: 'IoT',
     code: 'https://github.com/JuanArmando30/vehiculo_oit',
     demo: '', // 'https://vehiculos-juan.duckdns.org/docs' cuando la instancia EC2 esté encendida
-    images: [],
     tech: ['Python', 'FastAPI', 'WebSocket', 'AWS', 'MySQL', 'ESP32', 'MediaPipe', 'HTTPS · Caddy', 'Swagger'],
   },
   {
@@ -48,7 +45,6 @@ export const projects = [
     icon: 'IA',
     code: '',
     demo: '',
-    images: [],
     tech: ['Python', 'TensorFlow Lite', 'OpenCV', 'ESP32', 'Arduino'],
   },
 ]

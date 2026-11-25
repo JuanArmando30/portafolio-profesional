@@ -26,13 +26,9 @@ export const strings = {
     hero: {
       hello: 'Hola, soy',
       bio: [
-        'Desarrollador de software enfocado en ',
-        { hl: 'análisis de datos' },
-        ' y soluciones tecnológicas. Trabajo con desarrollo web full stack, Python, SQL, AWS, Excel, Power BI y redes para ',
-        { hl: 'optimizar procesos mediante la tecnología' },
-        '. Busco sumarme a proyectos innovadores donde aportar una visión analítica y soluciones eficientes mientras sigo creciendo técnicamente. Me distinguen el ',
-        { hl: 'pensamiento crítico, la iniciativa y el aprendizaje autónomo' },
-        '.',
+        'Desarrollador de software orientado al ',
+        { hl: 'análisis de datos y creación de aplicaciones web. ' },
+        'Enfocado en crear soluciones eficientes, optimizar procesos y transformar información en valor.',
       ],
       viewProjects: 'Ver proyectos',
       contact: 'Contáctame',
@@ -40,7 +36,7 @@ export const strings = {
       scroll: 'Bajar a proyectos',
       photoAlt: 'Foto de',
       email: 'Correo',
-      tags: ['</> Full Stack', '☁ AWS', '⚡ IoT + IA'],
+      tags: ['Full Stack', 'AWS', 'Python'],
     },
     projects: {
       eyebrow: '01 · Proyectos',
@@ -62,6 +58,7 @@ export const strings = {
       prev: 'Imagen anterior',
       next: 'Imagen siguiente',
       image: 'Imagen',
+      video: 'Video',
       of: 'de',
     },
     projectText: {
@@ -243,6 +240,7 @@ export const strings = {
       prev: 'Previous image',
       next: 'Next image',
       image: 'Image',
+      video: 'Video',
       of: 'of',
     },
     projectText: {

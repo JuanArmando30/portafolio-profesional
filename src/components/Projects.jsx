@@ -4,6 +4,7 @@ import { projects } from '../data/portfolio'
 import { useLang } from '../i18n'
 import { SectionHead, Stagger, StaggerItem, TiltCard } from './Motion'
 import Cover from './Covers'
+import { mediaOf } from '../data/media'
 import TechIcon, { useTechLabel } from './TechIcon'
 import ProjectModal, { ProjectLinks } from './ProjectModal'
 import { EyeIcon } from './Icons'
@@ -15,11 +16,21 @@ function ProjectCard({ p, onOpen }) {
   const label = useTechLabel()
   const txt = t.projectText[p.id]
   const extra = p.tech.length - CARD_TECH
+  const media = mediaOf(p.id)
+  const cover = media.find((m) => m.type === 'image')
+  const photos = media.filter((m) => m.type === 'image').length
+  const hasVideo = media.some((m) => m.type === 'video')
 
   return (
     <TiltCard className="pcard" max={4}>
       <button className="pcard__media" onClick={onOpen} aria-label={`${t.projects.details}: ${txt.title}`}>
-        {p.images[0] ? <img src={p.images[0]} alt="" loading="lazy" /> : <Cover id={p.id} text={txt.cover} />}
+        {cover ? <img src={cover.src} alt="" loading="lazy" /> : <Cover id={p.id} text={txt.cover} />}
+        {(photos > 0 || hasVideo) && (
+          <span className="pcard__count">
+            {photos > 0 && <span>▣ {photos}</span>}
+            {hasVideo && <span>▶ {t.projects.video}</span>}
+          </span>
+        )}
       </button>
 
       <div className="pcard__body">

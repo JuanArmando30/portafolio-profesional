@@ -3,7 +3,7 @@ import { motion } from 'framer-motion'
 
 /**
  * Ilustraciones animadas de cada proyecto. Se usan mientras no haya
- * capturas reales en projects[].images (data/portfolio.js).
+ * fotos en src/assets/proyectos/<id>/ (ver data/media.js).
  */
 
 const ease = [0.22, 1, 0.36, 1]

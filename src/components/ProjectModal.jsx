@@ -3,6 +3,7 @@ import { AnimatePresence, motion } from 'framer-motion'
 import { createPortal } from 'react-dom'
 import { useLang } from '../i18n'
 import Cover from './Covers'
+import { mediaOf } from '../data/media'
 import TechIcon, { useTechLabel } from './TechIcon'
 import { ArrowIcon, CloseIcon, ExtIcon, GitHubIcon } from './Icons'
 
@@ -40,13 +41,39 @@ export function ProjectLinks({ p, size = 'sm' }) {
   )
 }
 
+function PlayBadge() {
+  return (
+    <span className="play-badge" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="16" height="16"><path fill="currentColor" d="M8 5.5v13l11-6.5-11-6.5Z" /></svg>
+    </span>
+  )
+}
+
 function Gallery({ p, txt }) {
   const { t } = useLang()
   const [i, setI] = useState(0)
   const [dir, setDir] = useState(1)
-  const imgs = p.images
+  const items = mediaOf(p.id)
+  const n = items.length
 
-  if (!imgs.length) {
+  const go = (d) => {
+    setDir(d)
+    setI((v) => (v + d + n) % n)
+  }
+
+  // Flechas del teclado para cambiar de foto
+  useEffect(() => {
+    if (n < 2) return
+    const onKey = (e) => {
+      if (e.target.tagName === 'VIDEO') return
+      if (e.key === 'ArrowRight') go(1)
+      if (e.key === 'ArrowLeft') go(-1)
+    }
+    window.addEventListener('keydown', onKey)
+    return () => window.removeEventListener('keydown', onKey)
+  })
+
+  if (!n) {
     return (
       <div className="gallery">
         <div className="gallery__stage gallery__stage--cover"><Cover id={p.id} text={txt.cover} /></div>
@@ -54,26 +81,26 @@ function Gallery({ p, txt }) {
     )
   }
 
-  const go = (d) => {
-    setDir(d)
-    setI((v) => (v + d + imgs.length) % imgs.length)
+  const item = items[i]
+  const alt = `${txt.title} — ${t.projects.image} ${i + 1} ${t.projects.of} ${n}`
+  const slide = {
+    initial: { opacity: 0, x: dir * 60 },
+    animate: { opacity: 1, x: 0 },
+    exit: { opacity: 0, x: dir * -60 },
+    transition: { duration: 0.4, ease },
   }
 
   return (
     <div className="gallery">
-      <div className="gallery__stage">
-        <AnimatePresence initial={false} custom={dir} mode="popLayout">
-          <motion.img
-            key={imgs[i]}
-            src={imgs[i]}
-            alt={`${txt.title} — ${t.projects.image} ${i + 1} ${t.projects.of} ${imgs.length}`}
-            initial={{ opacity: 0, x: dir * 60 }}
-            animate={{ opacity: 1, x: 0 }}
-            exit={{ opacity: 0, x: dir * -60 }}
-            transition={{ duration: 0.4, ease }}
-          />
+      <div className={`gallery__stage ${item.type === 'video' ? 'is-video' : ''}`}>
+        <AnimatePresence initial={false} mode="popLayout">
+          {item.type === 'video' ? (
+            <motion.video key={item.src} src={item.src} controls playsInline preload="metadata" aria-label={alt} {...slide} />
+          ) : (
+            <motion.img key={item.src} src={item.src} alt={alt} {...slide} />
+          )}
         </AnimatePresence>
-        {imgs.length > 1 && (
+        {n > 1 && (
           <>
             <button className="gallery__nav gallery__nav--prev" onClick={() => go(-1)} aria-label={t.projects.prev}>
               <ArrowIcon style={{ transform: 'rotate(180deg)' }} />
@@ -81,20 +108,27 @@ function Gallery({ p, txt }) {
             <button className="gallery__nav gallery__nav--next" onClick={() => go(1)} aria-label={t.projects.next}>
               <ArrowIcon />
             </button>
-            <span className="gallery__count">{i + 1} / {imgs.length}</span>
+            <span className="gallery__count">{i + 1} / {n}</span>
           </>
         )}
       </div>
-      {imgs.length > 1 && (
+      {n > 1 && (
         <div className="gallery__thumbs">
-          {imgs.map((src, k) => (
+          {items.map((m, k) => (
             <button
-              key={src}
+              key={m.src}
               className={k === i ? 'is-active' : ''}
               onClick={() => { setDir(k > i ? 1 : -1); setI(k) }}
-              aria-label={`${t.projects.image} ${k + 1}`}
+              aria-label={`${m.type === 'video' ? t.projects.video : t.projects.image} ${k + 1}`}
             >
-              <img src={src} alt="" loading="lazy" />
+              {m.type === 'video' ? (
+                <>
+                  <video src={`${m.src}#t=0.5`} muted playsInline preload="metadata" tabIndex={-1} />
+                  <PlayBadge />
+                </>
+              ) : (
+                <img src={m.src} alt="" loading="lazy" />
+              )}
             </button>
           ))}
         </div>

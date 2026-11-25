@@ -21,9 +21,10 @@ npm run preview  # abre http://localhost:4173
 - **Textos (español e inglés):** [`src/data/i18n.js`](src/data/i18n.js). Cada texto existe en `es` y `en`; cambia ambos.
 - **Enlaces, proyectos y tecnologías:** [`src/data/portfolio.js`](src/data/portfolio.js).
 - **Proyectos:** en `projects` llena `code` (repositorio) y `demo` (sitio en vivo). Si quedan vacíos,
-  el botón se muestra deshabilitado. Para la galería del modal, guarda capturas en
-  `public/img/proyectos/` y agrégalas en `images`, por ejemplo `images: ['img/proyectos/vg-1.jpg']`.
-  Mientras no haya capturas se muestra una ilustración animada.
+  el botón se muestra deshabilitado.
+- **Fotos y videos de proyectos:** cópialos en `src/assets/proyectos/vg/`, `iot/` o `eco/` y aparecen
+  solos, ordenados por nombre (`1.jpg`, `2.jpg`…; la primera foto es la portada). Videos en `.mp4` o `.webm`.
+  Detalles en [`src/assets/proyectos/LEEME.md`](src/assets/proyectos/LEEME.md).
 - **Certificaciones:** en `certifications` agrega `image` (imagen del certificado en
   `public/certificados/`, se abre en grande con «Ver certificado») y/o `url` (enlace de
   verificación, por ejemplo Credly) para el botón «Verificar».

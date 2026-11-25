@@ -514,7 +514,10 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .pmodal__list strong { color: var(--text); }
 
 .gallery__stage { position: relative; aspect-ratio: 16 / 10.5; border-radius: 16px; overflow: hidden; border: 1px solid var(--border-strong); background: radial-gradient(ellipse at 30% 0%, var(--glow), transparent 60%), var(--bg-2); }
-.gallery__stage img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.gallery__stage img, .gallery__stage video { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: contain; }
+.gallery__stage video { background: #000; }
+.gallery__stage.is-video .gallery__count { bottom: auto; top: 0.8rem; }
+.gallery__stage.is-video .gallery__nav { top: 42%; }
 .gallery__stage--cover .cover { padding: clamp(1rem, 3vw, 2rem); }
 .gallery__stage--cover .term__body { font-size: clamp(0.7rem, 1.2vw, 0.85rem); }
 .gallery__stage--cover .mock__chart { height: clamp(60px, 9vw, 100px); }
@@ -524,9 +527,13 @@ ul, ol { margin: 0; padding: 0; list-style: none; }
 .gallery__nav--next { right: 1rem; }
 .gallery__count { position: absolute; bottom: 0.8rem; right: 0.9rem; font-size: 0.85rem; font-weight: 600; padding: 0.25rem 0.65rem; border-radius: 8px; color: #fff; background: rgba(2, 8, 23, 0.65); }
 .gallery__thumbs { display: flex; gap: 0.6rem; margin-top: 0.9rem; padding-bottom: 0.4rem; overflow-x: auto; scrollbar-width: thin; }
-.gallery__thumbs button { flex: none; width: 110px; aspect-ratio: 16 / 10; padding: 0; border-radius: 10px; overflow: hidden; border: 2px solid var(--border); opacity: 0.6; transition: opacity 0.2s, border-color 0.2s; }
+.gallery__thumbs button { position: relative; flex: none; width: 110px; aspect-ratio: 16 / 10; padding: 0; border-radius: 10px; overflow: hidden; border: 2px solid var(--border); opacity: 0.6; transition: opacity 0.2s, border-color 0.2s; }
 .gallery__thumbs button.is-active, .gallery__thumbs button:hover { opacity: 1; border-color: var(--accent); }
-.gallery__thumbs img { width: 100%; height: 100%; object-fit: cover; }
+.gallery__thumbs img, .gallery__thumbs video { width: 100%; height: 100%; object-fit: cover; pointer-events: none; }
+.play-badge { position: absolute; left: 50%; top: 50%; translate: -50% -50%; display: grid; place-items: center; width: 30px; height: 30px; border-radius: 50%; color: #fff; background: rgba(2, 8, 23, 0.6); border: 1.5px solid rgba(255, 255, 255, 0.7); }
+.play-badge svg { margin-left: 2px; }
+.pcard__count { position: absolute; left: 0.75rem; bottom: 0.75rem; z-index: 2; display: flex; gap: 0.4rem; }
+.pcard__count span { font-size: 0.7rem; font-weight: 700; padding: 0.25rem 0.55rem; border-radius: 8px; color: #fff; background: rgba(2, 8, 23, 0.6); backdrop-filter: blur(6px); }
 
 /* Visor de certificados */
 .viewer { position: relative; margin: 0; max-width: min(1000px, 100%); max-height: 92vh; display: flex; flex-direction: column; gap: 0.75rem; }
