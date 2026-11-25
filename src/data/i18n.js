@@ -36,7 +36,10 @@ export const strings = {
       scroll: 'Bajar a proyectos',
       photoAlt: 'Foto de',
       email: 'Correo',
-      tags: ['Full Stack', 'AWS', 'Python'],
+      // Skills que van cambiando en las 3 etiquetas junto a tu foto (sin emojis).
+      // Texto: 'SQL' · Solo logo (sin texto): { icon: 'React' } — usa un nombre de techIcons en portfolio.js
+      // La etiqueta 1 muestra 1ª, 4ª, 7ª…; la 2 muestra 2ª, 5ª, 8ª…; la 3 muestra 3ª, 6ª, 9ª…
+      tags: ['Full Stack', 'AWS', 'Python', 'Análisis de datos', { icon: 'React' }, 'SQL', { icon: 'Power BI' }, 'FastAPI', { icon: 'TensorFlow' }, 'IoT + IA', { icon: 'JavaScript' }, { icon: 'PHP' }],
     },
     projects: {
       eyebrow: '01 · Proyectos',
@@ -218,7 +221,7 @@ export const strings = {
       scroll: 'Scroll to projects',
       photoAlt: 'Photo of',
       email: 'Email',
-      tags: ['</> Full Stack', '☁ AWS', '⚡ IoT + AI'],
+      tags: ['Full Stack', 'AWS', 'Python', 'Data analysis', { icon: 'React' }, 'SQL', { icon: 'Power BI' }, 'FastAPI', { icon: 'TensorFlow' }, 'IoT + AI', { icon: 'JavaScript' }, { icon: 'PHP' }],
     },
     projects: {
       eyebrow: '01 · Projects',

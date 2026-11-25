@@ -1,8 +1,9 @@
-import { useState } from 'react'
-import { motion, useScroll, useTransform } from 'framer-motion'
+import { useEffect, useState } from 'react'
+import { AnimatePresence, motion, useScroll, useTransform } from 'framer-motion'
 import { profile } from '../data/portfolio'
 import { Magnetic } from './Motion'
 import ScrambleName from './ScrambleName'
+import TechIcon from './TechIcon'
 import { useLang } from '../i18n'
 import { ArrowIcon, DownloadIcon, GitHubIcon, LinkedInIcon, MailIcon } from './Icons'
 
@@ -12,6 +13,64 @@ const fadeUp = (delay) => ({
   animate: { opacity: 1, y: 0 },
   transition: { duration: 0.9, delay, ease },
 })
+
+// Flotación de cada etiqueta (como antes) y cada cuánto cambia su texto
+const FLOAT = [
+  { y: -10, duration: 4, delay: 0 },
+  { y: 10, duration: 5, delay: 0 },
+  { y: -8, duration: 4.5, delay: 1 },
+]
+const SWAP_EVERY = 4010 // ms entre cambios de cada etiqueta
+
+/** Etiqueta flotante que va mostrando una skill distinta cada cierto tiempo. */
+function FloatTag({ index, skills, y, duration, delay }) {
+  const [step, setStep] = useState(0)
+  const count = Math.ceil(skills.length / FLOAT.length)
+
+  useEffect(() => {
+    let id
+    // Escalonado: cada etiqueta empieza a cambiar en un momento distinto
+    const start = setTimeout(() => {
+      setStep((s) => s + 1)
+      id = setInterval(() => setStep((s) => s + 1), SWAP_EVERY)
+    }, SWAP_EVERY + index * 1000)
+    return () => {
+      clearTimeout(start)
+      clearInterval(id)
+    }
+  }, [index])
+
+  const item = skills[(index + FLOAT.length * (step % count)) % skills.length]
+  const isIcon = typeof item === 'object'
+  const key = isIcon ? `icon:${item.icon}` : item
+
+  return (
+    <motion.span
+      className={`float-tag float-tag--${index + 1} ${isIcon ? 'float-tag--icon' : ''}`}
+      title={isIcon ? item.icon : undefined}
+      animate={{ y: [0, y, 0] }}
+      transition={{ duration, repeat: Infinity, ease: 'easeInOut', delay }}
+    >
+      <AnimatePresence mode="wait" initial={false}>
+        <motion.span
+          key={key}
+          className="float-tag__text"
+          initial={{ opacity: 0, y: 8, filter: 'blur(4px)' }}
+          animate={{ opacity: 1, y: 0, filter: 'blur(0px)' }}
+          exit={{ opacity: 0, y: -8, filter: 'blur(4px)' }}
+          transition={{ duration: 0.25 }}
+        >
+          {isIcon ? (
+            <>
+              <TechIcon name={item.icon} size={22} />
+              <span className="sr-only">{item.icon}</span>
+            </>
+          ) : item}
+        </motion.span>
+      </AnimatePresence>
+    </motion.span>
+  )
+}
 
 export default function Hero() {
   const { t } = useLang()
@@ -98,27 +157,9 @@ export default function Hero() {
                 <span className="avatar__initials">{profile.brand}</span>
               )}
             </div>
-            <motion.span
-              className="float-tag float-tag--1"
-              animate={{ y: [0, -10, 0] }}
-              transition={{ duration: 4, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              {t.hero.tags[0]}
-            </motion.span>
-            <motion.span
-              className="float-tag float-tag--2"
-              animate={{ y: [0, 10, 0] }}
-              transition={{ duration: 5, repeat: Infinity, ease: 'easeInOut' }}
-            >
-              {t.hero.tags[1]}
-            </motion.span>
-            <motion.span
-              className="float-tag float-tag--3"
-              animate={{ y: [0, -8, 0] }}
-              transition={{ duration: 4.5, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
-            >
-              {t.hero.tags[2]}
-            </motion.span>
+            {FLOAT.map((f, i) => (
+              <FloatTag key={i} index={i} skills={t.hero.tags} {...f} />
+            ))}
           </motion.div>
         </motion.div>
       </div>

@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
 import { GitHubIcon, MoonIcon, SunIcon } from './Icons'
 import { profile } from '../data/portfolio'
@@ -19,6 +19,23 @@ export default function Navbar({ theme, onToggleTheme }) {
   const { scrollYProgress } = useScroll()
   const progress = useSpring(scrollYProgress, { stiffness: 120, damping: 25 })
   const links = ids.map((id, i) => ({ id, label: t.nav[keys[i]] }))
+
+  // En el menú móvil: primero se cierra el menú y, cuando termina de cerrarse, se hace el
+  // desplazamiento. (Framer Motion restaura el scroll al medir la animación de cierre
+  // con height: 'auto', y eso cancelaba el salto a la sección.)
+  const pending = useRef(null)
+  const goTo = (e, id) => {
+    e.preventDefault()
+    pending.current = id
+    setOpen(false)
+  }
+  const afterMenuClose = () => {
+    const id = pending.current
+    pending.current = null
+    if (!id) return
+    document.getElementById(id)?.scrollIntoView({ behavior: 'smooth', block: 'start' })
+    history.replaceState(null, '', `#${id}`)
+  }
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -107,7 +124,7 @@ export default function Navbar({ theme, onToggleTheme }) {
         </div>
       </div>
 
-      <AnimatePresence>
+      <AnimatePresence onExitComplete={afterMenuClose}>
         {open && (
           <motion.nav
             className="nav__mobile"
@@ -121,7 +138,7 @@ export default function Navbar({ theme, onToggleTheme }) {
               <motion.a
                 key={l.id}
                 href={`#${l.id}`}
-                onClick={() => setOpen(false)}
+                onClick={(e) => goTo(e, l.id)}
                 initial={{ x: -20, opacity: 0 }}
                 animate={{ x: 0, opacity: 1 }}
                 transition={{ delay: 0.05 * i + 0.1 }}
